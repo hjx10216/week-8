@@ -2,9 +2,24 @@
 Midterm Functions + Signatures
 ================================ */
 
+var map = L.map('map', {
+  center: [24.6408, 46.7728],
+  zoom: 5,
+});
+
+var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 0,
+  maxZoom: 20,
+  ext: 'png'
+}).addTo(map);
+
+
+
 var testData = {
   max: 8,
-  data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 50.75, lng:-1.55, count: 1}]
+  data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 22.5408, lng:44.6728, count: 2}]
 };
 
 var baseLayer = L.tileLayer(
@@ -34,12 +49,7 @@ var cfg = {
 };
 
 
-var heatmapLayer = new HeatmapOverlay(cfg);
 
-var map = new L.Map('map-canvas', {
-  center: new L.LatLng(25.6586, -80.3568),
-  zoom: 4,
-  layers: [baseLayer, heatmapLayer]
-});
+var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
 
 heatmapLayer.setData(testData);
